@@ -3,28 +3,13 @@ import { useRef, useEffect, useState } from "react";
 import { Planet, PlanetOrbitType } from '../lib/Planet'
 import { getAngle, getAngle2, getPointOnCircle, getPointOnEllispe } from "../lib/utils";
 
-const NUM_STARS = 150; // Nombre d'étoiles
+const NUM_STARS = 150;
 
 const PlanetCanvas = ({ hourOfYear }) => {
   const canvasRef = useRef();
   const ctxRef = useRef();
   const [planets, setPlanets] = useState([]);
   const [stars, setStars] = useState([]);
-
-  // Génération des étoiles une seule fois
-  useEffect(() => {
-    const generateStars = (width, height, numStars) => {
-      return Array.from({ length: numStars }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        size: Math.random() * 2,
-        opacity: Math.random() * 0.7 + 0.3, // Opacité entre 0.3 et 1
-      }));
-    };
-
-    const canvas = canvasRef.current;
-    setStars(generateStars(canvas.width, canvas.height, NUM_STARS));
-  }, []);
 
   const loadImage = (src) => {
     const img = new Image();
@@ -37,8 +22,6 @@ const PlanetCanvas = ({ hourOfYear }) => {
   const VENUS_D_IMG = loadImage("VENUS_D.png");
   const MARS_U_IMG = loadImage("MARS_U.png");
 
-
-  // Dessiner le fond étoilé
   const drawStars = (ctx) => {
     stars.forEach((star) => {
       ctx.beginPath();
@@ -76,6 +59,20 @@ const PlanetCanvas = ({ hourOfYear }) => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctxRef.current = canvas.getContext("2d");
+  }, []);
+
+  useEffect(() => {
+    const generateStars = (width, height, numStars) => {
+      return Array.from({ length: numStars }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 2,
+        opacity: Math.random() * 0.7 + 0.3,
+      }));
+    };
+
+    const canvas = canvasRef.current;
+    setStars(generateStars(canvas.width, canvas.height, NUM_STARS));
   }, []);
 
   useEffect(() => {
