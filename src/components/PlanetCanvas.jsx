@@ -1,7 +1,5 @@
 import { useRef, useEffect, useState } from "react";
 
-import '../styles/PlanetCanvas.css'
-
 import { Planet, PlanetOrbitType } from '../lib/Planet'
 import { getAngle, getAngle2, getPointOnCircle, getPointOnEllispe } from "../lib/utils";
 

@@ -4,6 +4,7 @@ import './styles/App.css'
 import PlanetCanvas from './components/PlanetCanvas'
 import HUD from './components/HUD'
 import { dateToHourOfYear } from './lib/utils';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
     <>
       <HUD autoMode={autoMode} setAutoMode={setAutoMode} hourOfYear={hourOfYear} setHourOfYear={setHourOfYear} />
       <PlanetCanvas autoMode={autoMode} hourOfYear={hourOfYear} />
+      <Footer />
     </>
   )
 }
