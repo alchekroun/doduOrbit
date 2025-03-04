@@ -5,7 +5,7 @@ import { getAngle, getAngle2, getPointOnCircle, getPointOnEllispe } from "../lib
 
 const NUM_STARS = 150;
 
-const PlanetCanvas = ({ hourOfYear }) => {
+const PlanetCanvas = ({ autoMode, hourOfYear }) => {
   const canvasRef = useRef();
   const ctxRef = useRef();
   const [planets, setPlanets] = useState([]);
@@ -84,6 +84,11 @@ const PlanetCanvas = ({ hourOfYear }) => {
     ];
     setPlanets(tmpPlanets);
   }, []);
+
+  useEffect(() => {
+    planets.forEach((p) => p.trail = [])
+  }, [autoMode])
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
